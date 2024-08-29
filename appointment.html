@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind POS</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
+  <script src="https://unpkg.com/idb/build/iife/index-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
+  <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' %}" rel="stylesheet">
+  
+
+  <script src="{% static 'assets/assets/js/script.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="{% static 'assets/cs/style.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/cs/responsive.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/cs/bootstrap.css' %}" />
+  <style>
+    .layout_padding {
+      padding: 8px 0 !important;
+    }
+
+    .product_section .heading_container {
+      margin-bottom: 1px !important;
+    }
+
+    .heading_container h2 {
+      font-size: 2.2rem !important;
+      font-weight: 100 !important;
+    }
+    .img-box {
+      img {
+        border-radius: 3% !important;
+      }
+    }
+  </style>
+  <style>
+    #home {
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+    }
+    
+    #sidebar {
+      position: fixed;
+      top: 400px; /* Adjust this value to position the sidebar below the "Home" text */
+      left: 0;
+      width: 100px;
+      height:100px; /* Adjust this value to match the top value above */
+      background-color: white;
+      color: #fff;
+      padding : 20px;
+      display: none; /* Initially hidden */
+    }
+    .my-svg {
+      fill: white; /* Change 'red' to any color you want */
+    }
+    .shgg {
+      visibility: hidden;
+    }
+    .tool:hover .shgg {
+      visibility: visible;
+    }
+</style>
+</head>
+
+<body class="bg-blue-gray-50" x-data="initApp()" x-init="initDatabase()">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- noprint-area -->
+  <div class="hide-print flex flex-row h-screen antialiased text-blue-gray-800">
+    <!-- left sidebar -->
+
+
+    <!-- page content -->
+    <div class="flex-grow flex">
+      <!-- store menu -->
+      <div class="flex flex-col bg-blue-gray-50 h-full w-full py-4">
+        <div class="flex px-2 flex-row relative">
+          <div class="absolute left-5 top-3 px-2 py-2 rounded-full bg-cyan-500 text-white">
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg> 
+          </div>
+          <input type="text"
+            class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none"
+            placeholder=" ..." x-model="keyword" />
+        </div>
+
+          <!-- product section -->
+          <section class="product_section layout_padding">
+            <div class="container">
+                <div class="heading_container heading_center">
+                    <h2 class="tool">Our <span>Doctors</span></h2>
+                </div>
+                <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <div class="box">
+                                    <div class="option_container">
+                                        <div class="options">
+                                            <a class="option2" href="{% url 'details'  %}">Appointment</a>
+                                        </div>
+                                    </div>
+                                    <div class="img-box">
+                                     <img src="{% static 'assets/img/gallery/team3.png' %}" alt="">
+                                    </div>
+                                    
+                                    <div class="detail-box">
+                                        <h5>{{ dt.name }}</h5>
+                                        <!-- Add other doctor details here -->
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                              <div class="box">
+                                  <div class="option_container">
+                                      <div class="options">
+                                          <a class="option2" href="{% url 'details'  %}">Appointment</a>
+                                      </div>
+                                  </div>
+                                  <div class="img-box">
+                                   <img src="{% static 'assets/img/gallery/team2.png' %}" alt="">
+                                  </div>
+                                  
+                                  <div class="detail-box">
+                                      <h5>{{ dt.name }}</h5>
+                                      <!-- Add other doctor details here -->
+                                  </div>
+                              </div>
+                          </div>  
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                              <div class="box">
+                                  <div class="option_container">
+                                      <div class="options">
+                                          <a class="option2" href="{% url 'details'  %}">Appointment</a>
+                                      </div>
+                                  </div>
+                                  <div class="img-box">
+                                   <img src="{% static 'assets/img/gallery/team2.png' %}" alt="">
+                                  </div>
+                                  
+                                  <div class="detail-box">
+                                      <h5>{{ dt.name }}</h5>
+                                      <!-- Add other doctor details here -->
+                                  </div>
+                              </div>
+                          </div> 
+                </div>
+                <div class="btn-box">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+        </section>
+        
+    <!-- end of noprint-area -->
+  
+    <div id="print-area" class="print-area"></div>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+  </body>
+  
+  </html>
+  
+  <script>
+    $(document).ready(function() {
+        $('#home').click(function() {
+          $('#sidebar').slideToggle('slow');
+        });
+      });
+      
+  </script>

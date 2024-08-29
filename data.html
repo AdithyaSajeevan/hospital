@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">                
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: center;">patient details</h1>
+              
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>PatientName</th>
+                    <th>disease</th>
+                    <th>age</th> 
+                    <th>gender</th> 
+                    <th>docter</th>
+                    <th>number</th>                                  
+                  </tr>
+                </thead>
+                {% if datas %}
+                 {% for dt in datas %}
+                <tbody>
+                  <tr>
+                    <th>{{dt.name}}</th>
+                    <th>{{dt.disease}}</th>
+                    <th>{{dt.age}}</th>
+                    <th>{{dt.gender}}</th>
+                    <th>{{dt.mobile}}</th>
+
+                                                      
+                  </tr>
+                </tbody>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>

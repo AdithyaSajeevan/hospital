@@ -1,0 +1,123 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind POS</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
+    <script src="https://unpkg.com/idb/build/iife/index-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="{% static 'assets/cs/style.css' %}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{% static 'assets/cs/responsive.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/cs/bootstrap.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #home {
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+    }
+    
+    #sidebar {
+      position: fixed;
+      top: 400px; /* Adjust this value to position the sidebar below the "Home" text */
+      left: 0;
+      width: 100px;
+      height:100px; /* Adjust this value to match the top value above */
+      background-color: white;
+      color: #fff;
+      padding : 20px;
+      display: none; /* Initially hidden */
+    }
+    .my-svg {
+      fill: white; /* Change 'red' to any color you want */
+    }
+    .shgg {
+      visibility: hidden;
+    }
+    .tool:hover .shgg {
+      visibility: visible;
+    }
+</style>
+
+<body class="bg-blue-gray-50" x-data="initApp()" x-init="initDatabase()">
+    <!-- noprint-area -->
+    <div class="hide-print flex flex-row h-screen antialiased text-blue-gray-800">
+        <!-- left sidebar -->
+
+                    
+                        {% comment %} <a href="{% url 'addprdt' %}" class="flex items-center" title="add products"> {% endcomment %}
+                            
+                  
+                       
+                     
+                     
+
+        <div class="flex-grow flex">
+            <!-- store menu -->
+            <div class="flex flex-col bg-blue-gray-50 h-full w-full py-4">
+                <div class="flex px-2 flex-row relative">
+                    <div class="absolute left-5 top-3 px-2 py-2 rounded-full bg-cyan-500 text-white">
+  
+                    </div>
+
+                </div>
+                <div>
+
+                    <!-- Add product -->
+                    <section class="product_section layout_padding">
+                        <div class="container">
+                            <div class="heading_container heading_center">
+                                <h2>Add <span></span></h2>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            {% if messages %}
+                            <div class="alert alert-success">
+                                {% for message in messages %}
+                                {{ message }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <form
+                                action="{% if instance and instance.id %}{% url 'update' pk=instance.id %}{% else %}{% url 'save' %}{% endif %}"
+                                method="post" class="form-group" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-primary">
+                                    {% if instance %}Update Details{% else %}Submit Details{% endif %}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    $(document).ready(function() {
+        $('#home').click(function() {
+          $('#sidebar').slideToggle('slow');
+        });
+      });
+      
+  </script>
